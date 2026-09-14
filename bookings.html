@@ -1,0 +1,153 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+ 
+<head> 
+ 
+    <meta charset="UTF-8"> 
+ 
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0"> 
+ 
+    <title>Bookings - BusBook</title> 
+ 
+    <link rel="stylesheet" href="css/style.css"> 
+ 
+</head> 
+ 
+<body> 
+ 
+    <header> 
+ 
+        <h1>🚌 BusBook - Admin Panel</h1> 
+ 
+        <nav> 
+ 
+            <a href="admin-dashboard.html">Dashboard</a> 
+ 
+            <a href="buses.html">Manage Buses</a> 
+ 
+            <a href="bookings.html">Bookings</a> 
+ 
+            <a href="users.html">Users</a> 
+ 
+            <a href="#" onclick="adminLogout()">Logout</a> 
+ 
+        </nav> 
+ 
+    </header> 
+ 
+    <section class="container"> 
+ 
+        <h2>🎫 All Bookings</h2> 
+ 
+        <p>View customer booking details.</p> 
+ 
+        <br> 
+ 
+        <div id="bookingList"></div> 
+ 
+    </section> 
+ 
+    <footer> 
+ 
+        <p> 
+            © 2026 BusBook - Admin Panel 
+        </p> 
+ 
+    </footer> 
+ 
+    <script> 
+ 
+        if (localStorage.getItem("adminLogin") !== "true") { 
+ 
+            alert("Please login as Admin."); 
+ 
+            window.location.href = "admin-login.html"; 
+ 
+        } 
+ 
+        function displayBookings() { 
+ 
+            let bookingList = 
+                document.getElementById("bookingList"); 
+ 
+            let bookings = 
+                JSON.parse( 
+                    localStorage.getItem("bookings") 
+                ) || []; 
+ 
+            if (bookings.length === 0) { 
+ 
+                bookingList.innerHTML = 
+                    "<p>❌ No bookings available.</p>"; 
+ 
+                return; 
+ 
+            } 
+ 
+            bookingList.innerHTML = ""; 
+ 
+            bookings.forEach(function(booking) { 
+ 
+                let card = 
+                    document.createElement("div"); 
+ 
+                card.className = "bus-card"; 
+ 
+                card.innerHTML = ` 
+ 
+                    <div class="bus-info"> 
+ 
+                        <h3>🎫 Booking ID: ${booking.bookingId || "-"}</h3> 
+ 
+                        <p><strong>Passenger:</strong> ${booking.name || "-"}</p> 
+ 
+                        <p><strong>Age:</strong> ${booking.age || "-"}</p> 
+ 
+                        <p><strong>Gender:</strong> ${booking.gender || "-"}</p> 
+ 
+                        <p><strong>Phone:</strong> ${booking.phone || "-"}</p> 
+ 
+                        <p><strong>Email:</strong> ${booking.email || "-"}</p> 
+ 
+                        <p><strong>Route:</strong> ${booking.from || "-"} → ${booking.to || "-"}</p> 
+ 
+                        <p><strong>Journey Date:</strong> ${booking.date || "-"}</p> 
+ 
+                        <p><strong>Bus:</strong> ${booking.bus || "-"}</p> 
+ 
+                        <p><strong>Seat:</strong> ${booking.seat || "-"}</p> 
+ 
+                        <p><strong>Price:</strong> ₹${booking.price || "-"}</p> 
+ 
+                        <p><strong>Payment Method:</strong> ${booking.paymentMethod || "-"}</p> 
+ 
+                        <p><strong>Payment Status:</strong> ${booking.paymentStatus || "Not Paid"}</p> 
+ 
+                    </div> 
+ 
+                `; 
+ 
+                bookingList.appendChild(card); 
+ 
+            }); 
+ 
+        } 
+ 
+        function adminLogout() { 
+ 
+            localStorage.removeItem("adminLogin"); 
+ 
+            alert("Admin logged out successfully!"); 
+ 
+            window.location.href = "admin-login.html"; 
+ 
+        } 
+ 
+        displayBookings(); 
+ 
+    </script> 
+ 
+</body> 
+ 
+</html>

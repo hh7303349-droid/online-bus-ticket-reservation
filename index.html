@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Reservation</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>🚌 BusBook</h1>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="booking.html">My Booking</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="feedback.html">Feedback</a>
+        </nav>
+        <div class="panel-links">
+
+    <a href="login.html" class="panel-card">
+        <h2>👤 User Panel</h2>
+        <p>Book bus tickets and manage your booking</p>
+        <button type="button">Enter User Panel</button>
+    </a>
+
+    <a href="admin-login.html" class="panel-card">
+        <h2>👨‍💼 Admin Panel</h2>
+        <p>Manage buses, bookings and users</p>
+        <button type="button">Enter Admin Panel</button>
+    </a>
+
+</div>
+    </header>
+    
+    <!-- USER & ADMIN PANEL -->
+
+<section class="panel-selection">
+
+    <h2>Welcome to BusBook 🚌</h2>
+
+    <p>Select your panel</p>
+
+    <div class="panel-container">
+
+        <!-- USER PANEL -->
+        <div class="panel-card">
+
+            <h2>👤 User Panel</h2>
+
+            <p>
+                Search buses, book tickets,
+                select seats and view bookings.
+            </p>
+
+            <a href="login.html">
+                <button type="button">
+                    Enter User Panel
+                </button>
+            </a>
+
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <div class="panel-card">
+
+            <h2>👨‍💼 Admin Panel</h2>
+
+            <p>
+                Manage buses, bookings,
+                users and payments.
+            </p>
+
+            <a href="admin-login.html">
+                <button type="button">
+                    Enter Admin Panel
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <!-- HERO / SEARCH SECTION -->
+    <section class="hero">
+
+        <div class="search-box">
+
+            <h2>Search & Book Bus Tickets</h2>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>From</label>
+                    <input
+                        type="text"
+                        id="from"
+                        placeholder="Enter departure city">
+                </div>
+
+                <div class="form-group">
+                    <label>To</label>
+                    <input
+                        type="text"
+                        id="to"
+                        placeholder="Enter destination">
+                </div>
+
+                <div class="form-group">
+                    <label>Journey Date</label>
+                    <input type="date" id="date">
+                </div>
+
+            </div>
+
+            <button class="search-btn" onclick="searchBus()">
+                Search Buses
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- BUS RESULTS -->
+    <section id="busResults" class="container hidden">
+
+        <h2>Available Buses</h2>
+
+        <div class="bus-card">
+
+            <div class="bus-info">
+
+                <h3>Express Travels</h3>
+
+                <p>🕘 09:00 AM → 03:00 PM</p>
+
+                <p>AC Sleeper</p>
+
+                <p>⭐ 4.5 Rating</p>
+
+            </div>
+
+            <div>
+
+                <p class="price">₹650</p>
+
+                <br>
+
+                <button onclick="bookBus()">
+                    Book Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="bus-card">
+
+            <div class="bus-info">
+
+                <h3>City Rider</h3>
+
+                <p>🕚 11:00 AM → 05:30 PM</p>
+
+                <p>Non-AC Seater</p>
+
+                <p>⭐ 4.2 Rating</p>
+
+            </div>
+
+            <div>
+
+                <p class="price">₹450</p>
+
+                <br>
+
+                <button onclick="bookBus()">
+                    Book Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SEAT SELECTION -->
+
+<section id="seatSection" class="container seat-section hidden">
+
+    <h2>Select Your Seat</h2>
+
+    <p>Please select one available seat.</p>
+
+    <div class="seat-layout">
+
+        <div class="seat-row">
+            <button class="seat" onclick="selectSeat(this, 'A1')">A1</button>
+            <button class="seat" onclick="selectSeat(this, 'A2')">A2</button>
+
+            <span></span>
+
+            <button class="seat booked">A3</button>
+            <button class="seat" onclick="selectSeat(this, 'A4')">A4</button>
+        </div>
+
+        <div class="seat-row">
+            <button class="seat" onclick="selectSeat(this, 'B1')">B1</button>
+            <button class="seat booked">B2</button>
+
+            <span></span>
+
+            <button class="seat" onclick="selectSeat(this, 'B3')">B3</button>
+            <button class="seat" onclick="selectSeat(this, 'B4')">B4</button>
+        </div>
+
+        <div class="seat-row">
+            <button class="seat" onclick="selectSeat(this, 'C1')">C1</button>
+            <button class="seat" onclick="selectSeat(this, 'C2')">C2</button>
+
+            <span></span>
+
+            <button class="seat" onclick="selectSeat(this, 'C3')">C3</button>
+            <button class="seat booked">C4</button>
+        </div>
+
+        <div class="seat-row">
+            <button class="seat" onclick="selectSeat(this, 'D1')">D1</button>
+            <button class="seat" onclick="selectSeat(this, 'D2')">D2</button>
+
+            <span></span>
+
+            <button class="seat" onclick="selectSeat(this, 'D3')">D3</button>
+            <button class="seat" onclick="selectSeat(this, 'D4')">D4</button>
+        </div>
+
+    </div>
+
+    <p id="selectedSeatText">
+        Selected Seat: None
+    </p>
+
+    <br>
+
+    <button onclick="continueBooking()">
+        Continue
+    </button>
+
+</section>
+<!-- PASSENGER DETAILS -->
+
+<section id="passengerSection" class="container passenger-section hidden">
+
+    <h2>Passenger Details</h2>
+
+    <div class="passenger-form">
+
+        <div>
+            <label>Full Name</label>
+            <input type="text" id="passengerName"
+                   placeholder="Enter your full name">
+        </div>
+
+        <div>
+            <label>Age</label>
+            <input type="number" id="passengerAge"
+                   placeholder="Enter your age">
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <select id="passengerGender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Phone Number</label>
+            <input type="tel" id="passengerPhone"
+                   placeholder="Enter phone number">
+        </div>
+
+        <div class="full">
+            <label>Email</label>
+            <input type="email" id="passengerEmail"
+                   placeholder="Enter email">
+        </div>
+
+    </div>
+
+    <br>
+
+    <button onclick="confirmPassenger()">
+        Continue
+    </button>
+
+</section>
+<!-- BOOKING CONFIRMATION -->
+
+<section id="confirmationSection" class="container confirmation hidden">
+
+    <h2>🎫 Booking Confirmed!</h2>
+
+    <p><strong>Booking ID:</strong> <span id="bookingId"></span></p>
+
+    <p><strong>Passenger Name:</strong> <span id="confirmName"></span></p>
+
+    <p><strong>Age:</strong> <span id="confirmAge"></span></p>
+
+    <p><strong>Gender:</strong> <span id="confirmGender"></span></p>
+
+    <p><strong>Phone:</strong> <span id="confirmPhone"></span></p>
+
+    <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
+
+    <p><strong>Route:</strong>
+        <span id="confirmFrom"></span>
+        →
+        <span id="confirmTo"></span>
+    </p>
+
+    <p><strong>Journey Date:</strong>
+        <span id="confirmDate"></span>
+    </p>
+
+    <p><strong>Bus:</strong>
+        Express Travels
+    </p>
+
+    <p><strong>Seat:</strong>
+        <span id="confirmSeat"></span>
+    </p>
+
+    <p><strong>Ticket Price:</strong> ₹650</p>
+
+    <br>
+
+    <button onclick="printTicket()">
+        🖨️ Print Ticket
+    </button>
+
+</section>
+<!-- PAYMENT SECTION -->
+
+<section id="paymentSection" class="container passenger-section hidden">
+
+    <h2>💳 Payment</h2>
+
+    <p><strong>Ticket Amount:</strong> ₹650</p>
+
+    <br>
+
+    <div>
+        <label>Payment Method</label>
+
+        <select id="paymentMethod">
+            <option value="">Select Payment Method</option>
+            <option>UPI</option>
+            <option>Debit Card</option>
+            <option>Credit Card</option>
+            <option>Net Banking</option>
+        </select>
+    </div>
+
+    <br>
+
+    <button onclick="makePayment()">
+        Pay ₹650
+    </button>
+
+</section>
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 BusBook - Online Bus Ticket Reservation System
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+function searchBus() {
+
+    let from =
+        document.getElementById("from").value;
+
+    let to =
+        document.getElementById("to").value;
+
+    let date =
+        document.getElementById("date").value;
+
+    if (from === "" || to === "" || date === "") {
+
+        alert("Please enter From, To and Journey Date.");
+
+        return;
+    }
+
+    document
+        .getElementById("busResults")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("busResults")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+let selectedSeat = "";
+
+
+function bookBus() {
+
+    document
+        .getElementById("seatSection")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("seatSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function selectSeat(button, seatNumber) {
+
+    if (button.classList.contains("booked")) {
+        return;
+    }
+
+    document
+        .querySelectorAll(".seat")
+        .forEach(function(seat) {
+
+            seat.classList.remove("selected");
+
+        });
+
+    button.classList.add("selected");
+
+    selectedSeat = seatNumber;
+
+    document
+        .getElementById("selectedSeatText")
+        .innerText =
+        "Selected Seat: " + seatNumber;
+}
+
+
+function continueBooking() {
+
+    if (selectedSeat === "") {
+
+        alert("Please select a seat.");
+
+        return;
+    }
+
+    document
+        .getElementById("passengerSection")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("passengerSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function confirmPassenger() {
+
+    let name =
+        document.getElementById("passengerName").value;
+
+    let age =
+        document.getElementById("passengerAge").value;
+
+    let gender =
+        document.getElementById("passengerGender").value;
+
+    let phone =
+        document.getElementById("passengerPhone").value;
+
+    let email =
+        document.getElementById("passengerEmail").value;
+
+
+    if (
+        name === "" ||
+        age === "" ||
+        gender === "" ||
+        phone === "" ||
+        email === ""
+    ) {
+
+        alert("Please fill all passenger details.");
+
+        return;
+    }
+
+
+    // Generate Booking ID
+let randomNumber =
+    Math.floor(100000 + Math.random() * 900000);
+
+document.getElementById("bookingId").innerText =
+    "BUS" + randomNumber;
+
+
+// LOCAL STORAGE
+
+localStorage.setItem("bookingId", "BUS" + randomNumber);
+localStorage.setItem("passengerName", name);
+localStorage.setItem("age", age);
+localStorage.setItem("gender", gender);
+localStorage.setItem("phone", phone);
+localStorage.setItem("email", email);
+
+// SAVE BOOKING FOR ADMIN PANEL
+
+let bookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+let newBooking = {
+
+    bookingId: "BUS" + randomNumber,
+
+    name: name,
+
+    age: age,
+
+    gender: gender,
+
+    phone: phone,
+
+    email: email,
+
+    from: document.getElementById("from").value,
+
+    to: document.getElementById("to").value,
+
+    date: document.getElementById("date").value,
+
+    bus: "Express Travels",
+
+    seat: selectedSeat,
+
+    price: "650",
+
+    paymentMethod: "Not Paid",
+
+    paymentStatus: "Not Paid"
+
+};
+
+bookings.push(newBooking);
+
+localStorage.setItem(
+    "bookings",
+    JSON.stringify(bookings)
+);
+
+localStorage.setItem(
+    "from",
+    document.getElementById("from").value
+);
+
+localStorage.setItem(
+    "to",
+    document.getElementById("to").value
+);
+
+localStorage.setItem(
+    "date",
+    document.getElementById("date").value
+);
+
+localStorage.setItem("seat", selectedSeat);
+localStorage.setItem("bus", "Express Travels");
+localStorage.setItem("price", "650");
+
+
+    // Show confirmation details
+
+    document
+        .getElementById("confirmName")
+        .innerText = name;
+
+    document
+        .getElementById("confirmAge")
+        .innerText = age;
+
+    document
+        .getElementById("confirmGender")
+        .innerText = gender;
+
+    document
+        .getElementById("confirmPhone")
+        .innerText = phone;
+
+    document
+        .getElementById("confirmEmail")
+        .innerText = email;
+
+    document
+        .getElementById("confirmFrom")
+        .innerText =
+        document.getElementById("from").value;
+
+    document
+        .getElementById("confirmTo")
+        .innerText =
+        document.getElementById("to").value;
+
+    document
+        .getElementById("confirmDate")
+        .innerText =
+        document.getElementById("date").value;
+
+    document
+        .getElementById("confirmSeat")
+        .innerText = selectedSeat;
+
+
+
+    // Show confirmation
+
+    document
+        .getElementById("confirmationSection")
+        .classList.remove("hidden");
+
+
+    // Show payment
+
+    document
+        .getElementById("paymentSection")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("paymentSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function printTicket() {
+
+    window.print();
+
+}
+
+
+function makePayment() {
+
+    let paymentMethod =
+        document.getElementById("paymentMethod").value;
+
+
+    if (paymentMethod === "") {
+
+        alert("Please select a payment method.");
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "paymentMethod",
+        paymentMethod
+    );
+
+    localStorage.setItem(
+        "paymentStatus",
+        "Payment Successful"
+    );
+
+
+    alert("Payment successful!");
+
+}
+
+</script>
+
+</body>
+</html>

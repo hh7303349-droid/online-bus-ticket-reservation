@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - BusBook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🚌 BusBook - Admin Panel</h1>
+
+        <nav>
+
+            <a href="admin-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="buses.html">
+                Manage Buses
+            </a>
+
+            <a href="bookings.html">
+                Bookings
+            </a>
+
+            <a href="users.html">
+                Users
+            </a>
+
+            <a href="#" onclick="adminLogout()">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section class="container">
+
+        <h2>📊 Admin Dashboard</h2>
+
+        <p>
+            Welcome to BusBook Admin Panel
+        </p>
+
+        <br>
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="bus-card"
+     onclick="window.location.href='buses.html'"
+     style="cursor:pointer;">
+
+    <div>
+
+        <h3>🚌 Total Buses</h3>
+
+        <p id="totalBuses">
+            0
+        </p>
+
+        <small>Click to Manage Buses →</small>
+
+    </div>
+
+</div>
+
+
+        <div class="bus-card"
+     onclick="window.location.href='bookings.html'"
+     style="cursor:pointer;">
+
+    <div>
+
+        <h3>🎫 Total Bookings</h3>
+
+        <p id="totalBookings">
+            0
+        </p>
+
+        <small>Click to View Bookings →</small>
+
+    </div>
+
+</div>
+
+
+        <div class="bus-card"
+     onclick="window.location.href='users.html'"
+     style="cursor:pointer;">
+
+    <div>
+
+        <h3>👥 Total Users</h3>
+
+        <p id="totalUsers">
+            0
+        </p>
+
+        <small>Click to View Users →</small>
+
+    </div>
+
+</div>
+
+
+        <br>
+
+        <h3>⚙️ Admin Actions</h3>
+
+        <br>
+
+        <button onclick="window.location.href='buses.html'">
+            🚌 Manage Buses
+        </button>
+
+        <br><br>
+
+        <button onclick="window.location.href='bookings.html'">
+            🎫 View Bookings
+        </button>
+
+        <br><br>
+
+        <button onclick="window.location.href='users.html'">
+            👥 View Users
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 BusBook - Admin Panel
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Check Admin Login
+
+        if (localStorage.getItem("adminLogin") !== "true") {
+
+            alert("Please login as Admin.");
+
+            window.location.href =
+                "admin-login.html";
+
+        }
+// Total Buses
+
+let buses =
+    JSON.parse(localStorage.getItem("buses")) || [];
+
+document.getElementById("totalBuses").innerText =
+    buses.length;
+
+
+// Total Bookings
+
+let bookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+document.getElementById("totalBookings").innerText =
+    bookings.length;
+
+
+// Total Users
+
+let users =
+    JSON.parse(localStorage.getItem("users")) || [];
+
+document.getElementById("totalUsers").innerText =
+    users.length;
+
+        // Logout
+
+        function adminLogout() {
+
+            localStorage.removeItem("adminLogin");
+
+            alert("Admin logged out successfully!");
+
+            window.location.href =
+                "admin-login.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback - BusBook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🚌 BusBook</h1>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="booking.html">My Booking</a>
+
+            <a href="login.html">Login</a>
+
+            <a href="register.html">Register</a>
+
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- FEEDBACK FORM -->
+
+    <section class="container">
+
+        <div class="login-box">
+
+            <h2>💬 Customer Feedback</h2>
+
+            <p>How was your BusBook service?</p>
+
+            <br>
+
+
+            <!-- RATING -->
+
+            <label>Service Rating</label>
+
+            <select id="feedbackRating">
+
+                <option value="">
+                    Select Rating
+                </option>
+
+                <option value="5">
+                    ⭐⭐⭐⭐⭐ Excellent
+                </option>
+
+                <option value="4">
+                    ⭐⭐⭐⭐ Good
+                </option>
+
+                <option value="3">
+                    ⭐⭐⭐ Average
+                </option>
+
+                <option value="2">
+                    ⭐⭐ Poor
+                </option>
+
+                <option value="1">
+                    ⭐ Very Poor
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <!-- COMMENT -->
+
+            <label>Your Feedback</label>
+
+            <textarea
+                id="feedbackMessage"
+                rows="5"
+                placeholder="Tell us about your experience...">
+            </textarea>
+
+            <br><br>
+
+
+            <button onclick="submitFeedback()">
+
+                💬 Submit Feedback
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- PUBLIC FEEDBACK -->
+
+    <section class="container">
+
+        <h2>⭐ Customer Reviews</h2>
+
+        <p>See what our customers say about BusBook.</p>
+
+        <br>
+
+        <div id="feedbackList"></div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 BusBook - Online Bus Ticket Reservation System
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+
+        // Submit Feedback
+
+        function submitFeedback() {
+
+            let rating =
+                document.getElementById("feedbackRating").value;
+
+            let message =
+                document.getElementById("feedbackMessage").value.trim();
+
+
+            // Check fields
+
+            if (
+                rating === "" ||
+                message === ""
+            ) {
+
+                alert("Please give a rating and feedback.");
+
+                return;
+
+            }
+
+
+            // Get existing feedbacks
+
+            let feedbacks =
+                JSON.parse(
+                    localStorage.getItem("feedbacks")
+                ) || [];
+
+
+            // New feedback
+
+            let newFeedback = {
+
+                rating: rating,
+
+                message: message,
+
+                date: new Date().toLocaleString()
+
+            };
+
+
+            // Add feedback
+
+            feedbacks.push(newFeedback);
+
+
+            // Save
+
+            localStorage.setItem(
+                "feedbacks",
+                JSON.stringify(feedbacks)
+            );
+
+
+            alert(
+                "Thank you! Your feedback has been submitted."
+            );
+
+
+            // Clear form
+
+            document.getElementById("feedbackRating").value = "";
+
+            document.getElementById("feedbackMessage").value = "";
+
+
+            // Refresh reviews
+
+            displayFeedbacks();
+
+        }
+
+
+        // Display Customer Feedback
+
+        function displayFeedbacks() {
+
+            let feedbackList =
+                document.getElementById("feedbackList");
+
+
+            let feedbacks =
+                JSON.parse(
+                    localStorage.getItem("feedbacks")
+                ) || [];
+
+
+            if (feedbacks.length === 0) {
+
+                feedbackList.innerHTML = `
+
+                    <div class="bus-card">
+
+                        <p>
+                            No customer reviews yet.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            feedbackList.innerHTML = "";
+
+
+            feedbacks.forEach(function(feedback) {
+
+                let card =
+                    document.createElement("div");
+
+                card.className = "bus-card";
+
+
+                card.innerHTML = `
+
+                    <div class="bus-info">
+
+                        <h3>
+                            ${"⭐".repeat(
+                                Number(feedback.rating)
+                            )}
+                        </h3>
+
+                        <p>
+                            "${feedback.message}"
+                        </p>
+
+                        <small>
+                            ${feedback.date}
+                        </small>
+
+                    </div>
+
+                `;
+
+
+                feedbackList.appendChild(card);
+
+            });
+
+        }
+
+
+        // Load feedbacks
+
+        displayFeedbacks();
+
+    </script>
+
+</body>
+
+</html>

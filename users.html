@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Users - BusBook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>🚌 BusBook - Admin Panel</h1>
+
+        <nav>
+
+            <a href="admin-dashboard.html">Dashboard</a>
+
+            <a href="buses.html">Manage Buses</a>
+
+            <a href="bookings.html">Bookings</a>
+
+            <a href="users.html">Users</a>
+
+            <a href="#" onclick="adminLogout()">Logout</a>
+
+        </nav>
+
+    </header>
+
+
+    <section class="container">
+
+        <h2>👥 Registered Users</h2>
+
+        <p>View users registered in BusBook.</p>
+
+        <br>
+
+        <div id="userList"></div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 BusBook - Admin Panel
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // Check Admin Login
+
+        if (localStorage.getItem("adminLogin") !== "true") {
+
+            alert("Please login as Admin.");
+
+            window.location.href = "admin-login.html";
+
+        }
+
+
+        // Display All Users
+
+        function displayUsers() {
+
+            let userList =
+                document.getElementById("userList");
+
+            let users =
+                JSON.parse(
+                    localStorage.getItem("users")
+                ) || [];
+
+
+            // No users
+
+            if (users.length === 0) {
+
+                userList.innerHTML = `
+
+                    <div class="bus-card">
+
+                        <h3>❌ No Registered Users</h3>
+
+                        <p>
+                            No users have registered yet.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            userList.innerHTML = "";
+
+
+            // Display every user
+
+            users.forEach(function(user, index) {
+
+                let card =
+                    document.createElement("div");
+
+                card.className = "bus-card";
+
+
+                card.innerHTML = `
+
+                    <div class="bus-info">
+
+                        <h3>
+                            👤 User ${index + 1}
+                        </h3>
+
+                        <p>
+                            <strong>Name:</strong>
+                            ${user.name || "-"}
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            ${user.email || "-"}
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            ${user.phone || "-"}
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                userList.appendChild(card);
+
+            });
+
+        }
+
+
+        // Logout
+
+        function adminLogout() {
+
+            localStorage.removeItem("adminLogin");
+
+            alert("Admin logged out successfully!");
+
+            window.location.href =
+                "admin-login.html";
+
+        }
+
+
+        // Load users
+
+        displayUsers();
+
+    </script>
+
+</body>
+
+</html>

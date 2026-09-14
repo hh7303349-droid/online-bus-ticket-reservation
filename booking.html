@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Booking - BusBook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <h1>🚌 BusBook</h1>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="booking.html">My Booking</a>
+
+            <a href="#">Login</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MY BOOKING -->
+
+    <section class="container">
+
+        <h2>📋 My Booking</h2>
+
+        <p>Here are your booking details.</p>
+
+
+        <!-- BOOKING CARD -->
+
+        <div class="bus-card">
+
+            <div class="bus-info">
+
+                <h3>🎫 Booking Confirmed</h3>
+
+                <p>
+                    <strong>Booking ID:</strong>
+                    <span id="showBookingId"></span>
+                </p>
+
+                <p>
+                    <strong>Passenger Name:</strong>
+                    <span id="showName"></span>
+                </p>
+
+                <p>
+                    <strong>Age:</strong>
+                    <span id="showAge"></span>
+                </p>
+
+                <p>
+                    <strong>Gender:</strong>
+                    <span id="showGender"></span>
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    <span id="showPhone"></span>
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    <span id="showEmail"></span>
+                </p>
+
+                <p>
+                    <strong>Route:</strong>
+                    <span id="showFrom"></span>
+                    →
+                    <span id="showTo"></span>
+                </p>
+
+                <p>
+                    <strong>Journey Date:</strong>
+                    <span id="showDate"></span>
+                </p>
+
+                <p>
+                    <strong>Bus:</strong>
+                    <span id="showBus"></span>
+                </p>
+
+                <p>
+                    <strong>Seat:</strong>
+                    <span id="showSeat"></span>
+                </p>
+
+                <p>
+                    <strong>Ticket Price:</strong>
+                    ₹<span id="showPrice"></span>
+                </p>
+
+                <p>
+                    <strong>Payment Method:</strong>
+                    <span id="showPaymentMethod"></span>
+                </p>
+
+                <p>
+                    <strong>Payment Status:</strong>
+                    <span id="showPaymentStatus"></span>
+                </p>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div>
+
+                <button onclick="printTicket()">
+                    🖨️ Print Ticket
+                </button>
+
+                <br><br>
+
+                <button onclick="cancelBooking()">
+                    ❌ Cancel Booking
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 BusBook - Online Bus Ticket Reservation System
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // Get booking details from LocalStorage
+
+        document.getElementById("showBookingId").innerText =
+            localStorage.getItem("bookingId") || "No Booking";
+
+        document.getElementById("showName").innerText =
+            localStorage.getItem("passengerName") || "-";
+
+        document.getElementById("showAge").innerText =
+            localStorage.getItem("age") || "-";
+
+        document.getElementById("showGender").innerText =
+            localStorage.getItem("gender") || "-";
+
+        document.getElementById("showPhone").innerText =
+            localStorage.getItem("phone") || "-";
+
+        document.getElementById("showEmail").innerText =
+            localStorage.getItem("email") || "-";
+
+        document.getElementById("showFrom").innerText =
+            localStorage.getItem("from") || "-";
+
+        document.getElementById("showTo").innerText =
+            localStorage.getItem("to") || "-";
+
+        document.getElementById("showDate").innerText =
+            localStorage.getItem("date") || "-";
+
+        document.getElementById("showBus").innerText =
+            localStorage.getItem("bus") || "-";
+
+        document.getElementById("showSeat").innerText =
+            localStorage.getItem("seat") || "-";
+
+        document.getElementById("showPrice").innerText =
+            localStorage.getItem("price") || "-";
+
+        document.getElementById("showPaymentMethod").innerText =
+            localStorage.getItem("paymentMethod") || "Not Paid";
+
+        document.getElementById("showPaymentStatus").innerText =
+            localStorage.getItem("paymentStatus") || "Not Paid";
+
+
+        // Print Ticket
+
+        function printTicket() {
+
+            window.print();
+
+        }
+
+
+        // Cancel Booking
+
+        function cancelBooking() {
+
+            let result = confirm(
+                "Are you sure you want to cancel this booking?"
+            );
+
+            if (result) {
+
+                localStorage.clear();
+
+                alert("Booking cancelled successfully!");
+
+                window.location.href = "index.html";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

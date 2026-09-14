@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - BusBook</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🚌 BusBook</h1>
+
+        <nav>
+            <a href="index.html">User Home</a>
+            <a href="login.html">User Login</a>
+        </nav>
+    </header>
+
+
+    <section class="container">
+
+        <div class="login-box">
+
+            <h2>🔐 Admin Login</h2>
+
+            <p>Login to BusBook Admin Panel</p>
+
+            <br>
+
+            <label>Admin Email</label>
+
+            <input
+                type="email"
+                id="adminEmail"
+                placeholder="Enter admin email">
+
+            <br><br>
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Enter admin password">
+
+            <br><br>
+
+            <button onclick="adminLogin()">
+                Login as Admin
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 BusBook - Admin Panel
+        </p>
+
+    </footer>
+
+
+    <script>
+
+async function adminLogin() {
+
+    let email =
+        document.getElementById("adminEmail").value;
+
+    let password =
+        document.getElementById("adminPassword").value;
+
+
+    if (email === "" || password === "") {
+
+        alert("Please enter email and password.");
+
+        return;
+    }
+
+
+    try {
+
+        let response = await fetch(
+            "http://localhost:3000/api/admin/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        let data = await response.json();
+
+
+        if (response.ok) {
+
+            localStorage.setItem(
+                "adminLogin",
+                "true"
+            );
+
+            alert(data.message);
+
+            window.location.href =
+                "admin-dashboard.html";
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Backend server is not connected.");
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>
